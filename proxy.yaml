@@ -1,0 +1,11 @@
+http:
+  services:
+    vault:
+      loadBalancer:
+        servers:
+          - url: http://host.containers.internal:30200
+  routers:
+    vault: 
+      entryPoints: https
+      rule: Host(`vault.bonjour.zone`)
+      service: vault

@@ -1,0 +1,39 @@
+[Unit]
+Description = Podman Container %N
+
+[Container]
+AutoUpdate = registry
+Image = ghcr.io/dani-garcia/vaultwarden:alpine
+ 
+Environment = DOMAIN=https://vault.bonjour.zone
+
+Environment = ADMIN_TOKEN=----ADMIN_TOKEN----
+Environment = SIGNUPS_ALLOWED=false
+Environment = SIGNUPS_VERIFY=true
+
+Environment = SMTP_FROM=bot@bonjour.zone
+Environment = SMTP_FROM_NAME=Vault
+Environment = SMTP_USERNAME=bot@bonjour.zone
+Environment = SMTP_PASSWORD=----SMTP_PASSWORD----
+Environment = SMTP_HOST=smtp.qiye.aliyun.com
+Environment = SMTP_SECURITY=force_tls
+
+Environment = YUBICO_CLIENT_ID=93315
+Environment = YUBICO_SECRET_KEY=----YUBICO_SECRET_KEY----
+
+Environment = DATABASE_URL=postgresql://vault:----DATABASE_PASSWORD----@host.containers.internal
+Environment = DATABASE_MAX_CONNS=2
+Environment = ICON_CACHE_FOLDER=icon_cache
+Environment = TEMPLATES_FOLDER=templates
+
+PublishPort = 30200:80
+
+SecurityLabelDisable = true
+Volume = ./templates/:/templates
+Volume = vault.volume:/data/
+
+[Service]
+Restart = on-failure
+
+[Install]
+WantedBy = default.target
