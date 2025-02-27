@@ -26,13 +26,13 @@ jobs:
       - name: Configure secrets ALIYUN_OSS
         run: echo '${{ secrets.ALIYUN_OSS }}' >> secrets/aliyun_oss; chmod u=rw,go= secrets/aliyun_oss
       - name: Configure service ADMIN_TOKEN
-        run: sed -i 's@----ADMIN_TOKEN----@${{ secrets.ADMIN_TOKEN }}@g' vault.container
+        run: sed -i 's%----ADMIN_TOKEN----%${{ secrets.ADMIN_TOKEN }}%g' vault.container
       - name: Configure service SMTP_PASSWORD
-        run: sed -i 's@----SMTP_PASSWORD----@${{ secrets.SMTP_PASSWORD }}@g' vault.container
+        run: sed -i 's%----SMTP_PASSWORD----%${{ secrets.SMTP_PASSWORD }}%g' vault.container
       - name: Configure service DATABASE_PASSWORD
-        run: sed -i 's@----DATABASE_PASSWORD----@${{ secrets.DATABASE_PASSWORD }}@g' vault.container
+        run: sed -i 's%----DATABASE_PASSWORD----%${{ secrets.DATABASE_PASSWORD }}%g' vault.container
       - name: Configure service YUBICO_SECRET_KEY
-        run: sed -i 's@----YUBICO_SECRET_KEY----@${{ secrets.YUBICO_SECRET_KEY }}@g' vault.container
+        run: sed -i 's%----YUBICO_SECRET_KEY----%${{ secrets.YUBICO_SECRET_KEY }}%g' vault.container
       - name: Configure service proxy
         run: mkdir proxy.container.d; mv proxy.conf proxy.container.d/proxy.conf
       - name: Make service directory
