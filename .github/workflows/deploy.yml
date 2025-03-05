@@ -33,6 +33,8 @@ jobs:
         run: sed -i 's%----DATABASE_PASSWORD----%${{ secrets.DATABASE_PASSWORD }}%g' vault.container
       - name: Configure service YUBICO_SECRET_KEY
         run: sed -i 's%----YUBICO_SECRET_KEY----%${{ secrets.YUBICO_SECRET_KEY }}%g' vault.container
+      - name: Configure service PUSH_INSTALLATION_KEY
+        run: sed -i 's%----PUSH_INSTALLATION_KEY----%${{ secrets.PUSH_INSTALLATION_KEY }}%g' vault.container
       - name: Configure service proxy
         run: mkdir proxy.container.d; mv proxy.conf proxy.container.d/vault.conf
       - name: Make service directory
