@@ -25,7 +25,7 @@ Environment = PUSH_ENABLED=true
 Environment = PUSH_INSTALLATION_ID=ebb8559a-734e-4582-aa31-b297008467dd
 Environment = PUSH_INSTALLATION_KEY=----PUSH_INSTALLATION_KEY----
 
-Environment = DATABASE_URL=mysql://vault:----DATABASE_PASSWORD----@bonjour-bj.mysql.rds.aliyuncs.com/vault
+Environment = DATABASE_URL=mysql://vault:----DATABASE_PASSWORD----@bonjour-bj-internal.mysql.rds.aliyuncs.com/vault
 Environment = ICON_CACHE_FOLDER=icon_cache
 Environment = TEMPLATES_FOLDER=templates
 
