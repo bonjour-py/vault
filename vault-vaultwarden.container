@@ -1,7 +1,6 @@
-[Unit]
-Description = Podman Container %N
-
 [Container]
+Pod = cloud.pod
+
 AutoUpdate = registry
 Image = ghcr.io/dani-garcia/vaultwarden:alpine
  
@@ -29,14 +28,8 @@ Environment = DATABASE_URL=mysql://vault:----DATABASE_PASSWORD----@bonjour-bj-in
 Environment = ICON_CACHE_FOLDER=icon_cache
 Environment = TEMPLATES_FOLDER=templates
 
-PublishPort = 30200:80
-
 SecurityLabelDisable = true
 Volume = ./templates/:/templates
-Volume = vault.volume:/data/
 
 [Service]
 Restart = on-failure
-
-[Install]
-WantedBy = default.target

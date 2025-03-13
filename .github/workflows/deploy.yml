@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - host: 1.bj.aliyun.bonjour.zone
+          - host: ecs.bj.aliyun.bonjour.zone
             pubkey: AAAAC3NzaC1lZDI1NTE5AAAAIFij2QuvS/uuJh9/8DhMLPl50eTeWixEGEb9oHwBKjba
     steps:
       - name: Make ssh directory
@@ -26,15 +26,15 @@ jobs:
       - name: Configure secrets ALIYUN_OSS
         run: echo '${{ secrets.ALIYUN_OSS }}' >> secrets/aliyun_oss; chmod u=rw,go= secrets/aliyun_oss
       - name: Configure service ADMIN_TOKEN
-        run: sed -i 's%----ADMIN_TOKEN----%${{ secrets.ADMIN_TOKEN }}%g' vault.container
+        run: sed -i 's%----ADMIN_TOKEN----%${{ secrets.ADMIN_TOKEN }}%g' vault-vaultwarden.container
       - name: Configure service SMTP_PASSWORD
-        run: sed -i 's%----SMTP_PASSWORD----%${{ secrets.SMTP_PASSWORD }}%g' vault.container
+        run: sed -i 's%----SMTP_PASSWORD----%${{ secrets.SMTP_PASSWORD }}%g' vault-vaultwarden.container
       - name: Configure service DATABASE_PASSWORD
-        run: sed -i 's%----DATABASE_PASSWORD----%${{ secrets.DATABASE_PASSWORD }}%g' vault.container
+        run: sed -i 's%----DATABASE_PASSWORD----%${{ secrets.DATABASE_PASSWORD }}%g' vault-vaultwarden.container
       - name: Configure service YUBICO_SECRET_KEY
-        run: sed -i 's%----YUBICO_SECRET_KEY----%${{ secrets.YUBICO_SECRET_KEY }}%g' vault.container
+        run: sed -i 's%----YUBICO_SECRET_KEY----%${{ secrets.YUBICO_SECRET_KEY }}%g' vault-vaultwarden.container
       - name: Configure service PUSH_INSTALLATION_KEY
-        run: sed -i 's%----PUSH_INSTALLATION_KEY----%${{ secrets.PUSH_INSTALLATION_KEY }}%g' vault.container
+        run: sed -i 's%----PUSH_INSTALLATION_KEY----%${{ secrets.PUSH_INSTALLATION_KEY }}%g' vault-vaultwarden.container
       - name: Configure service proxy
         run: mkdir proxy.container.d; mv proxy.conf proxy.container.d/vault.conf
       - name: Make service directory
@@ -44,6 +44,6 @@ jobs:
       - name: load service
         run: ssh service@${{ matrix.host }} systemctl --user daemon-reload
       - name: start service
-        run: ssh service@${{ matrix.host }} systemctl --user restart vault-volume vault
+        run: ssh service@${{ matrix.host }} systemctl --user restart vault
       - name: start service proxy
         run: ssh service@${{ matrix.host }} systemctl --user restart proxy

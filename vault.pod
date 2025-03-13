@@ -1,0 +1,15 @@
+[Unit]
+Description = Podman Service vault
+
+[Pod]
+ServiceName = vault
+
+PublishPort = 30200:80
+
+Volume = vault.volume:/data/
+
+[Service]
+Restart = on-failure
+
+[Install]
+WantedBy = default.target
