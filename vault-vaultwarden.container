@@ -1,5 +1,5 @@
 [Container]
-Pod = cloud.pod
+Pod = vault.pod
 
 AutoUpdate = registry
 Image = ghcr.io/dani-garcia/vaultwarden:alpine
