@@ -1,5 +1,5 @@
 [Unit]
-Description = Podman Container %N
+Description = Podman Service %N
 
 [Container]
 AutoUpdate = registry

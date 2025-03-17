@@ -10,7 +10,7 @@ jobs:
     strategy:
       matrix:
         include:
-          - host: 1.bj.aliyun.bonjour.zone
+          - host: ecs.bj.aliyun.bonjour.zone
             pubkey: AAAAC3NzaC1lZDI1NTE5AAAAIFij2QuvS/uuJh9/8DhMLPl50eTeWixEGEb9oHwBKjba
     steps:
       - name: Make ssh directory
@@ -44,6 +44,6 @@ jobs:
       - name: load service
         run: ssh service@${{ matrix.host }} systemctl --user daemon-reload
       - name: start service
-        run: ssh service@${{ matrix.host }} systemctl --user restart vault-volume vault
+        run: ssh service@${{ matrix.host }} systemctl --user restart vault
       - name: start service proxy
         run: ssh service@${{ matrix.host }} systemctl --user restart proxy
